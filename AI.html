@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="ai-robot-float">
+    <img 
+      src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png"
+      alt="AI Robot"
+    >
+</div>
+
+<div id="ai-float-btn" onclick="AIAssistant.toggle()">
+  💬 Chat
+</div>
+
+<div id="ai-chat-window" class="ai-window">
+    
+    <div class="ai-header">
+        <span>AI Safety Assistant</span>
+
+        <div class="ai-controls">
+            <button onclick="AIAssistant.minimize()">➖</button>
+            <button onclick="AIAssistant.maximize()">⬜</button>
+            <button onclick="AIAssistant.toggle()">✖</button>
+        </div>
+    </div>
+
+    <div id="ai-chat-box"></div>
+
+    <div class="ai-input-area">
+        <input id="ai-input" placeholder="Ask something..." />
+        <button onclick="AIAssistant.sendMessage()">Send</button>
+    </div>
+    <script src="AI.js"></script>
+</body>
+</html>

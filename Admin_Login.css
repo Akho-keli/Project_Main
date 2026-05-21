@@ -1,0 +1,295 @@
+
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+       font-family: 'Inter', sans-serif;
+}
+
+/* BODY */
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at top left, #0f172a, #020617);
+    overflow: hidden;
+    color: #fff;
+    position: relative;
+}
+
+/* BACKGROUND GLOW*/
+body::before,
+body::after {
+    content: "";
+    position: absolute;
+    pointer-events: none; 
+    z-index: 0;
+}
+
+/* GLOW 1 */
+body::before {
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(0,255,255,0.15), transparent 70%);
+    top: -150px;
+    left: -150px;
+    animation: float 8s ease-in-out infinite;
+}
+
+/* GLOW 2 */
+body::after {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(140,0,255,0.2), transparent 70%);
+    bottom: -120px;
+    right: -120px;
+    animation: float 10s ease-in-out infinite reverse;
+}
+
+/* FLOAT ANIMATION */
+@keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(20px); }
+}
+
+/* CONTAINER */
+.container {
+    position: relative;
+    width: 850px;
+    height: 500px;
+    display: flex;
+    border-radius: 20px;
+    overflow: hidden;
+
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(25px);
+    border: 1px solid rgba(255,255,255,0.15);
+    box-shadow: 0 0 60px rgba(0,0,0,0.6);
+
+    z-index: 1; 
+}
+
+/* LEFT SIDE INFO */
+.info-content {
+    width: 50%;
+    padding: 60px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: rgba(255,255,255,0.02);
+}
+
+/* TEXT */
+.h2 {
+    font-size: 36px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-shadow: 5px 5px 5px rgb(5, 129, 129);
+}
+
+.h3 {
+    font-size: 18px;
+    color: #00f5ff;
+    font-size: x-large;
+}
+
+.info {
+    font-size: 14px;
+    color: #aaa;
+    line-height: 1.6;
+}
+
+/* FORM */
+.form-box {
+    width: 50%;
+    padding: 60px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* TITLE */
+.form-box h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    background: linear-gradient(45deg, #00f5ff, #07020c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* INPUT BOX */
+.input-box {
+    position: relative;
+    margin: 20px 0;
+}
+
+/* INPUT */
+.input-box input {
+    width: 100%;
+    padding: 12px 40px 12px 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.05);
+    color: #fff;
+    outline: none;
+    transition: 0.3s;
+}
+
+/* INPUT FOCUS */
+.input-box input:focus {
+    border-color: #00f5ff;
+    box-shadow: 0 0 10px rgba(0,245,255,0.5);
+}
+
+/* LABEL */
+.input-box label {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    color: #aaa;
+    font-size: 14px;
+    pointer-events: none;
+    transition: 0.3s;
+    font-size: medium;
+}
+
+/* FLOAT LABEL */
+.input-box input:focus ~ label,
+.input-box input:valid ~ label {
+    top: -8px;
+    font-size: 11px;
+    color: #00f5ff;
+}
+
+/* ICON */
+.input-box ion-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #0c92a3;
+}
+
+/* CHECKBOX FIX */
+.checkbox-wrap {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    gap: 8px;
+}
+
+/* CUSTOM CHECKBOX */
+input[type="checkbox"] {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #aaa;
+    border-radius: 4px;
+    background: transparent;
+    cursor: pointer;
+    position: relative;
+    transition: 0.2s;
+}
+
+/* HOVER */
+input[type="checkbox"]:hover {
+    border-color: #0f5e61;
+}
+
+/* CHECKED */
+input[type="checkbox"]:checked {
+    background: linear-gradient(45deg, #00f5ff, #a855f7);
+    border: none;
+}
+
+/* CHECK ICON */
+input[type="checkbox"]:checked::after {
+    content: "✔";
+    position: absolute;
+    top: -2px;
+    left: 2px;
+    font-size: 12px;
+    color: black;
+}
+
+/* BUTTON */
+.bnt {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    margin-top: 15px;
+
+    background: linear-gradient(45deg, #1191db, #290c44);
+    color: #b1b1b1;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.bnt:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0,255,255,0.4);
+}
+
+/* LINKS */
+.regi-link {
+    margin-top: 15px;
+    font-size: 13px;
+    color: #aaa;
+}
+
+.regi-link a {
+    color: #00ff37;
+    text-decoration: none;
+}
+
+.regi-link a:hover {
+    text-decoration: underline;
+}
+
+/* CURVED SHAPES */
+.curved-shape,
+.curved-shape_2 {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.3;
+    pointer-events: none; 
+}
+
+.curved-shape {
+    width: 300px;
+    height: 300px;
+    background: rgb(14, 71, 71);
+    top: -100px;
+    right: -100px;
+}
+
+.curved-shape_2 {
+    width: 250px;
+    height: 250px;
+    background: rgb(0, 23, 128);
+    bottom: -100px;
+    left: -100px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        height: auto;
+        width: 90%;
+    }
+
+    .info-content,
+    .form-box {
+        width: 100%;
+        padding: 30px;
+    }
+}

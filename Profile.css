@@ -1,0 +1,125 @@
+/* ── BASE ───────────────────────────── */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    background: #f4f6f9;
+    color: #1f2937;
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+/* ── PROFILE CONTAINER ─────────────── */
+body {
+    min-height: 100vh;
+}
+
+h1 {
+    text-align: center;
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 25px;
+    color: #111827;
+}
+
+/* Wrap everything visually */
+body {
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ── PROFILE CARD STYLE ─────────────── */
+body > * {
+    max-width: 420px;
+    width: 100%;
+}
+
+/* ── INFO BLOCK ─────────────────────── */
+p {
+    background: #ffffff;
+    padding: 12px 14px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    font-size: 14px;
+}
+
+p strong {
+    color: #374151;
+}
+
+/* ── SECTION TITLE ──────────────────── */
+h3 {
+    margin-top: 18px;
+    margin-bottom: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #111827;
+}
+
+/* ── INPUTS ─────────────────────────── */
+input {
+    width: 100%;
+    padding: 11px 12px;
+    margin-bottom: 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+    transition: 0.2s ease;
+    background: #fff;
+}
+
+input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+}
+
+/* ── BUTTONS ────────────────────────── */
+button {
+    width: 100%;
+    padding: 11px;
+    margin-top: 8px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: 0.2s ease;
+}
+
+/* Update button */
+button:nth-of-type(1) {
+    background: #2563eb;
+    color: white;
+}
+
+button:nth-of-type(1):hover {
+    background: #1d4ed8;
+}
+
+/* Delete button */
+button:nth-of-type(2) {
+    background: #ef4444;
+    color: white;
+}
+
+button:nth-of-type(2):hover {
+    background: #dc2626;
+}
+
+/* ── MOBILE ─────────────────────────── */
+@media (max-width: 500px) {
+    body {
+        padding: 20px 12px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+}

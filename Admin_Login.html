@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="Admin_Login.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body> 
+    <!--This is the admin login form -->
+    <div class="container">
+        <div class="curved-shape"></div>
+        <div class="curved-shape_2"></div>
+        <div class="form-box Login">
+            <h2 class="animation">Admin Login</h2>
+
+            <form action=""  id="loginForm">
+                <div class="input-box">
+
+                    <input type="text" required id="email">
+                    <label for="">Email</label>
+                    <ion-icon name="mail-unread"></ion-icon>
+
+                </div>
+
+                <div class="input-box">
+
+                    <input type="text" required id="Code">
+                    <label for="">Admin Code</label>
+                    <ion-icon name="qr-code"></ion-icon>
+
+                </div>
+                <div class="input-box">
+                    <input type="password" required id="password">
+                    <label for="">Password</label>
+                    <ion-icon class="icon" name="lock-closed"></ion-icon><br>
+                </div><br>
+                
+                 <input type="checkbox" name="show" id="show">
+                 <label for="show">Show Password</label>
+                <div class="input-box">
+                    <button onclick="Login()" class="bnt" type="submit">Login</button>
+                </div>
+
+                <div class="regi-link animation ">
+                    <p>Don't have an account? <a href="Admin_Register.html" >Sign Up</a></p>
+                </div>
+
+                <div class="regi-link e">
+                    <p>Forgot password ? <a href="Reset_password.html">Reset Password</a></p>
+                </div>
+                
+            </form>      
+        </div>
+
+        <div class="info-content Login">
+            <h2 class="h2">Welcome</h2><br>
+            <p class="h3"><strong>Your home, smarter and safer</strong> </p><br>
+            <p class="info"> Simulate your home gas cylinder monitoring with real-time updates. Detect leaks, track pressure and temperature, and receive timely alerts keeping your family safe before any danger strikes.</p>
+        </div>
+    <script src="Admin_login.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

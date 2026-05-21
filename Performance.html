@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Apartment Gas Monitoring</title>
+
+    <link rel="stylesheet" href="Performance.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+</head>
+
+<body>
+
+    <!-- HEADER  -->
+    <header>
+        <h1>Smart Apartment Gas Monitoring</h1>
+        <p class="subtitle">Real-time Safety Dashboard</p>
+        <p id="modeIndicator" class="mode-indicator"> AUTO MODE</p>
+
+        <!-- Demo User/Admin Toggle -->
+        <button id="viewToggleBtn" class="toggle-btn">
+            Switch to User View
+        </button>
+    </header>
+
+    <main>
+        <!-- ENVIRONMENT -->
+        <section>
+            <h2>Environment</h2>
+            <p>Temp: <span id="outsideTemp">--</span> °C</p>
+            <p>Weather: <span id="weather">--</span></p>
+        </section>
+
+        <!-- ADMIN CONTROLS -->
+        <section class="admin">
+            <h2>Admin Controls</h2>
+            <button onclick="resetSystem()">Reset</button>
+            <button onclick="shutdownGas()">Turn Off Gas</button>
+            <button onclick="silenceAlarm()">Silence Alarm</button>
+        </section>
+
+        <!-- BUILDING LAYOUT  -->
+        <section>
+            <h2>Building Layout</h2>
+            <div id="dashboard"></div>
+
+            <div class="manual-controls">
+                <button id="increaseBtn">Increase Pressure & Temp</button>
+                <button id="decreaseBtn">Decrease Pressure & Temp</button>
+                <button id="manual">Toggle Automation</button>
+            </div>
+        </section>
+
+        <!-- RISK CHART -->
+        <section>
+            <h2>Risk Overview</h2>
+            <canvas id="riskChart"></canvas>
+        </section>
+
+        <!-- TEMPERATURE TREND  -->
+        <section>
+            <h2>Temperature Trend</h2>
+            <canvas id="tempChart"></canvas>
+        </section>
+
+        <!--ROOM RISK DISTRIBUTION  -->
+        <section>
+            <h2>Room Risk Distribution</h2>
+            <div class="pie-container">
+                <canvas id="pie101"></canvas>
+                <canvas id="pie102"></canvas>
+                <canvas id="pie103"></canvas>
+                <canvas id="pie104"></canvas>
+            </div>
+        </section>
+
+        <!-- SYSTEM LOG  -->
+        <section>
+            <h2>System Log</h2>
+            <div id="logBox"></div>
+        </section>
+    </main>
+
+    <!-- ALERTS & AUDIO -->
+    <div id="alertBox"></div>
+    <audio id="alarmSound" src="https://www.soundjay.com/buttons/beep-07.wav"></audio>
+
+    
+
+    <script src="Performance.js"></script>
+</body>
+
+</html>

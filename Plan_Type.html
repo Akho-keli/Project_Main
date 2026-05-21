@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Plan Type Dashboard</title>
+  <link rel="stylesheet" href="Plan_Type.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Claims Dashboard</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      padding: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background: #f2f2f2;
+    }
+
+    select {
+      padding: 8px;
+      margin-bottom: 10px;
+    }
+
+    .status {
+      padding: 4px 8px;
+      border-radius: 5px;
+      color: white;
+      display: inline-block;
+    }
+
+    .Pending { background: orange; }
+    .Approved { background: green; }
+    .Rejected { background: red; }
+  </style>
+</head>
+
+<body>
+<h1>Claims Dashboard</h1>
+
+  <label>Filter by Plan:</label>
+  <select id="filter">
+    <option value="all">All</option>
+    <option value="Basic">Basic</option>
+    <option value="Standard">Standard</option>
+    <option value="Premium">Premium</option>
+  </select>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Plan</th>
+        <th>Room</th>
+        <th>Damage Level</th>
+        <th>Claim Amount</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody id="data"></tbody>
+  </table>
+  <script src="Plan_Type.js"></script>
+
+</body>
+</html>

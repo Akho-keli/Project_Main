@@ -1,0 +1,274 @@
+/* ================= BODY & LAYOUT ================= */
+body {
+  background: #0f172a;
+  color: #f1f5f9;
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  text-align: center;
+}
+
+header {
+  background: #020617;
+  padding: 25px 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+.subtitle {
+  color: #94a3b8;
+  margin-top: 5px;
+  font-size: 0.9rem;
+}
+
+.mode-indicator {
+  font-weight: bold;
+  color: #22c55e;
+  margin-top: 5px;
+}
+
+section {
+  margin: 30px auto;
+  max-width: 1200px;
+  padding: 0 15px;
+}
+
+/* ================= DASHBOARD GRID ================= */
+#dashboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  padding: 20px;
+}
+
+/* ================= CARDS ================= */
+.card {
+  background: #1e293b;
+  padding: 20px;
+  border-radius: 12px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+}
+
+/* ================= ROOM STATUS ================= */
+.room {
+  border-top: 1px solid #334155;
+  margin-top: 15px;
+  padding-top: 10px;
+  text-align: left;
+}
+
+.normal {
+  color: #22c55e;
+  font-weight: bold;
+}
+
+.warning {
+  color: #facc15;
+  font-weight: bold;
+}
+
+.critical {
+  color: #fb923c;
+  font-weight: bold;
+}
+
+.emergency {
+  color: #ef4444;
+  font-weight: bold;
+}
+
+.off {
+  color: #94a3b8;
+}
+
+/* ================= CHARTS ================= */
+canvas {
+  max-width: 800px;
+  height: 300px !important;
+  margin: 20px auto;
+  display: block;
+  background: #f8fafc;
+  border-radius: 12px;
+}
+
+.pie-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+}
+
+.pie-container canvas {
+  width: 220px !important;
+  height: 220px !important;
+}
+
+/* ================= LOG & ALERT ================= */
+#logBox {
+  background: #020617;
+  height: 200px;
+  overflow-y: auto;
+  padding: 12px;
+  text-align: left;
+  border-radius: 10px;
+  border: 1px solid #334155;
+  font-size: 0.95rem;
+}
+
+#alertBox {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #ef4444;
+  color: white;
+  padding: 15px 20px;
+  display: none;
+  border-radius: 10px;
+  font-weight: bold;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+/* ================= BUTTONS ================= */
+.admin button,
+.manual-controls button {
+  margin: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  background: #3b82f6;
+  color: white;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.admin button:hover,
+.manual-controls button:hover {
+  background: #2563eb;
+  transform: translateY(-2px);
+}
+
+.manual-controls {
+  margin-top: 25px;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 600px) {
+  #dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .pie-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+#send {
+  margin: 15px;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 10px;
+  background: #22c55e;
+  /* green to match your indicators */
+  color: rgba(92, 62, 3, 0.829);
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  position: center;
+}
+
+#send:hover {
+  background: #16a34a;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
+}
+
+#send:active {
+  transform: scale(0.97);
+}
+
+#issue {
+  width: 100%;
+  max-width: 600px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #334155;
+  background: #020617;
+  /* dark background */
+  color: #f1f5f9;
+  /* light text */
+  font-size: 1rem;
+  font-family: inherit;
+  resize: none;
+  /* prevents resizing (optional) */
+  outline: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
+}
+
+/* Focus effect */
+#issue:focus {
+  border: 1px solid #22c55e;
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.6);
+}
+
+/* Placeholder text */
+#issue::placeholder {
+  color: #94a3b8;
+}
+
+#adminEmail {
+  width: 100%;
+  max-width: 600px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #334155;
+  background: #020617;
+  /* dark background */
+  color: #f1f5f9;
+  /* light text */
+  font-size: 1rem;
+  font-family: inherit;
+  resize: none;
+  /* prevents resizing (optional) */
+  outline: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
+}
+
+/* Focus effect */
+#adminEmail:focus {
+  border: 1px solid #22c55e;
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.6);
+}
+
+/* Placeholder text */
+#adminEmail::placeholder {
+  color: #94a3b8;
+}
+
+.emergency-btn {
+  background-color: red;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.emergency-btn:hover {
+  background-color: darkred;
+  transform: scale(1.05);
+}

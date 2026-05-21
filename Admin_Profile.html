@@ -1,0 +1,702 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modern Settings Dashboard</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#0f172a;
+    color:white;
+    min-height:100vh;
+    padding:30px;
+    transition:0.4s;
+}
+
+body.light{
+    background:#f1f5f9;
+    color:#111;
+}
+
+h1{
+    margin-bottom:30px;
+}
+
+/* GRID */
+
+.container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:25px;
+}
+
+/* CARD */
+
+.card{
+    background:#1e293b;
+    padding:25px;
+    border-radius:22px;
+    box-shadow:0 10px 20px rgba(0,0,0,0.3);
+    transition:0.4s;
+}
+
+body.light .card{
+    background:white;
+}
+
+.card h2{
+    margin-bottom:20px;
+}
+
+/* INPUTS */
+
+.input-group{
+    margin-bottom:18px;
+}
+
+.input-group label{
+    display:block;
+    margin-bottom:8px;
+    color:#cbd5e1;
+}
+
+body.light .input-group label{
+    color:#555;
+}
+
+.input-group input,
+.input-group select{
+    width:100%;
+    padding:14px;
+    border:none;
+    outline:none;
+    border-radius:12px;
+    background:#0f172a;
+    color:white;
+    font-size:15px;
+}
+
+body.light .input-group input,
+body.light .input-group select{
+    background:#e2e8f0;
+    color:black;
+}
+
+/* BUTTON */
+
+button{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:12px;
+    background:#6366f1;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    opacity:0.8;
+}
+
+/* TOGGLE */
+
+.setting{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.switch{
+    position:relative;
+    width:60px;
+    height:30px;
+}
+
+.switch input{
+    opacity:0;
+    width:0;
+    height:0;
+}
+
+.slider{
+    position:absolute;
+    cursor:pointer;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background:#475569;
+    transition:0.4s;
+    border-radius:30px;
+}
+
+.slider:before{
+    position:absolute;
+    content:"";
+    height:22px;
+    width:22px;
+    left:4px;
+    bottom:4px;
+    background:white;
+    transition:0.4s;
+    border-radius:50%;
+}
+
+input:checked + .slider{
+    background:#22c55e;
+}
+
+input:checked + .slider:before{
+    transform:translateX(30px);
+}
+
+/* STATUS */
+
+.status{
+    margin-top:15px;
+    padding:12px;
+    border-radius:10px;
+    background:#16a34a;
+    display:none;
+}
+
+/* ERROR */
+
+.error{
+    margin-top:15px;
+    padding:12px;
+    border-radius:10px;
+    background:#dc2626;
+    display:none;
+}
+
+/* THEME BUTTONS */
+
+.theme-buttons{
+    display:flex;
+    gap:10px;
+}
+
+.theme-buttons button{
+    flex:1;
+}
+
+.dark-btn{
+    background:#111827;
+}
+
+.light-btn{
+    background:#cbd5e1;
+    color:black;
+}
+
+/* PROFILE IMAGE */
+
+.profile-preview{
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    object-fit:cover;
+    margin-bottom:20px;
+    border:3px solid #6366f1;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:700px){
+
+    body{
+        padding:15px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>Settings</h1>
+
+<div class="container">
+
+    <!-- PROFILE -->
+
+    <div class="card">
+
+        <h2>Profile Settings</h2>
+
+        <center>
+            <img src="https://via.placeholder.com/100"
+            class="profile-preview"
+            id="profileImage">
+        </center>
+
+        <div class="input-group">
+            <label>Upload Profile Picture</label>
+            <input type="file" id="imageUpload" accept="image/*">
+        </div>
+
+        <div class="input-group">
+            <label>Name</label>
+            <input type="text" id="name" placeholder="Enter name">
+        </div>
+
+        <div class="input-group">
+            <label>Email</label>
+            <input type="email" id="email" placeholder="Enter email">
+        </div>
+
+        <div class="input-group">
+            <label>Phone Number</label>
+            <input type="tel" id="phone" placeholder="Enter phone number">
+        </div>
+
+        <div class="input-group">
+            <label>Role</label>
+
+            <select id="role">
+                <option>Manager</option>
+                <option>Admin</option>
+                <option>Developer</option>
+                <option>User</option>
+            </select>
+        </div>
+
+        <button onclick="saveProfile()">Save Profile</button>
+
+        <div class="status" id="profileStatus">
+            Profile Saved Successfully
+        </div>
+
+        <div class="error" id="profileError">
+            Please fill in all fields correctly
+        </div>
+
+    </div>
+
+    <!-- NOTIFICATIONS -->
+
+    <div class="card">
+
+        <h2>Notifications</h2>
+
+        <div class="setting">
+            <div>
+                <h3>Email Alerts</h3>
+                <p>Receive email notifications</p>
+            </div>
+
+            <label class="switch">
+                <input type="checkbox" id="emailToggle">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div class="setting">
+            <div>
+                <h3>Push Notifications</h3>
+                <p>Receive push notifications</p>
+            </div>
+
+            <label class="switch">
+                <input type="checkbox" id="pushToggle">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div class="setting">
+            <div>
+                <h3>SMS Notifications</h3>
+                <p>Receive SMS updates</p>
+            </div>
+
+            <label class="switch">
+                <input type="checkbox" id="smsToggle">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+    </div>
+
+    <!-- SECURITY -->
+
+    <div class="card">
+
+        <h2>Security</h2>
+
+        <div class="input-group">
+            <label>Current Password</label>
+            <input type="password" id="currentPassword" placeholder="Current password">
+        </div>
+
+        <div class="input-group">
+            <label>New Password</label>
+            <input type="password" id="password" placeholder="Enter new password">
+        </div>
+
+        <div class="input-group">
+            <label>Confirm Password</label>
+            <input type="password" id="confirmPassword" placeholder="Confirm password">
+        </div>
+
+        <button onclick="changePassword()">
+            Change Password
+        </button>
+
+        <div class="setting" style="margin-top:25px;">
+
+            <div>
+                <h3>Two-Factor Authentication</h3>
+                <p>Enable extra security</p>
+            </div>
+
+            <label class="switch">
+                <input type="checkbox" id="twoFactor">
+                <span class="slider"></span>
+            </label>
+
+        </div>
+
+        <div class="status" id="passwordStatus">
+            Password Updated Successfully
+        </div>
+
+        <div class="error" id="passwordError">
+            Passwords do not match
+        </div>
+
+    </div>
+
+    <!-- APPEARANCE -->
+
+    <div class="card">
+
+        <h2>Appearance</h2>
+
+        <div class="theme-buttons">
+
+            <button class="dark-btn" onclick="darkMode()">
+                🌙 Dark
+            </button>
+
+            <button class="light-btn" onclick="lightMode()">
+                ☀️ Light
+            </button>
+
+        </div>
+
+        <div class="input-group" style="margin-top:25px;">
+            <label>Language</label>
+
+            <select id="language">
+                <option>English</option>
+                <option>Zulu</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label>Font Size</label>
+
+            <select id="fontSize">
+                <option value="14px">Small</option>
+                <option value="16px">Medium</option>
+                <option value="18px">Large</option>
+            </select>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+/* SAVE PROFILE */
+
+function saveProfile(){
+
+    let name =
+    document.getElementById("name").value.trim();
+
+    let email =
+    document.getElementById("email").value.trim();
+
+    let phone =
+    document.getElementById("phone").value.trim();
+
+    let role =
+    document.getElementById("role").value;
+
+    let emailPattern =
+    /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+
+    if(name === "" || email === "" || phone === ""){
+
+        showError("profileError");
+        return;
+    }
+
+    if(!email.match(emailPattern)){
+
+        showError("profileError");
+        return;
+    }
+
+    localStorage.setItem("name", name);
+    localStorage.setItem("email", email);
+    localStorage.setItem("phone", phone);
+    localStorage.setItem("role", role);
+
+    showStatus("profileStatus");
+}
+
+/* STATUS FUNCTION */
+
+function showStatus(id){
+
+    let status =
+    document.getElementById(id);
+
+    status.style.display = "block";
+
+    setTimeout(() => {
+
+        status.style.display = "none";
+
+    }, 3000);
+}
+
+/* ERROR FUNCTION */
+
+function showError(id){
+
+    let error =
+    document.getElementById(id);
+
+    error.style.display = "block";
+
+    setTimeout(() => {
+
+        error.style.display = "none";
+
+    }, 3000);
+}
+
+/* LOAD PROFILE */
+
+window.onload = function(){
+
+    document.getElementById("name").value =
+    localStorage.getItem("name") || "";
+
+    document.getElementById("email").value =
+    localStorage.getItem("email") || "";
+
+    document.getElementById("phone").value =
+    localStorage.getItem("phone") || "";
+
+    document.getElementById("role").value =
+    localStorage.getItem("role") || "Manager";
+
+    document.getElementById("language").value =
+    localStorage.getItem("language") || "English";
+
+    document.getElementById("fontSize").value =
+    localStorage.getItem("fontSize") || "16px";
+
+    /* LOAD IMAGE */
+
+    let savedImage =
+    localStorage.getItem("profileImage");
+
+    if(savedImage){
+
+        document.getElementById("profileImage").src =
+        savedImage;
+    }
+
+    /* LOAD THEME */
+
+    if(localStorage.getItem("theme") === "light"){
+
+        document.body.classList.add("light");
+    }
+
+    /* LOAD FONT SIZE */
+
+    document.body.style.fontSize =
+    localStorage.getItem("fontSize") || "16px";
+
+}
+
+/* PASSWORD */
+
+function changePassword(){
+
+    let currentPassword =
+    document.getElementById("currentPassword").value;
+
+    let password =
+    document.getElementById("password").value;
+
+    let confirmPassword =
+    document.getElementById("confirmPassword").value;
+
+    let storedPassword =
+    localStorage.getItem("password");
+
+    if(storedPassword && currentPassword !== storedPassword){
+
+        showError("passwordError");
+        return;
+    }
+
+    if(password.length < 6){
+
+        alert("Password must be at least 6 characters");
+        return;
+    }
+
+    if(password !== confirmPassword){
+
+        showError("passwordError");
+        return;
+    }
+
+    localStorage.setItem("password", password);
+
+    showStatus("passwordStatus");
+}
+
+/* THEME */
+
+function lightMode(){
+
+    document.body.classList.add("light");
+
+    localStorage.setItem("theme","light");
+}
+
+function darkMode(){
+
+    document.body.classList.remove("light");
+
+    localStorage.setItem("theme","dark");
+}
+
+/* PROFILE IMAGE */
+
+document.getElementById("imageUpload")
+.addEventListener("change", function(event){
+
+    let reader = new FileReader();
+
+    reader.onload = function(){
+
+        document.getElementById("profileImage").src =
+        reader.result;
+
+        localStorage.setItem(
+            "profileImage",
+            reader.result
+        );
+    };
+
+    reader.readAsDataURL(event.target.files[0]);
+});
+
+/* LANGUAGE */
+
+document.getElementById("language")
+.addEventListener("change", function(){
+
+    localStorage.setItem(
+        "language",
+        this.value
+    );
+});
+
+/* FONT SIZE */
+
+document.getElementById("fontSize")
+.addEventListener("change", function(){
+
+    document.body.style.fontSize =
+    this.value;
+
+    localStorage.setItem(
+        "fontSize",
+        this.value
+    );
+});
+
+/* TOGGLES */
+
+document.getElementById("emailToggle")
+.addEventListener("change", function(){
+
+    localStorage.setItem(
+        "emailAlerts",
+        this.checked
+    );
+});
+
+document.getElementById("pushToggle")
+.addEventListener("change", function(){
+
+    localStorage.setItem(
+        "pushNotifications",
+        this.checked
+    );
+});
+
+document.getElementById("smsToggle")
+.addEventListener("change", function(){
+
+    localStorage.setItem(
+        "smsNotifications",
+        this.checked
+    );
+});
+
+document.getElementById("twoFactor")
+.addEventListener("change", function(){
+
+    localStorage.setItem(
+        "twoFactor",
+        this.checked
+    );
+});
+
+/* LOAD TOGGLES */
+
+document.getElementById("emailToggle").checked =
+localStorage.getItem("emailAlerts") === "true";
+
+document.getElementById("pushToggle").checked =
+localStorage.getItem("pushNotifications") === "true";
+
+document.getElementById("smsToggle").checked =
+localStorage.getItem("smsNotifications") === "true";
+
+document.getElementById("twoFactor").checked =
+localStorage.getItem("twoFactor") === "true";
+
+</script>
+
+</body>
+</html>

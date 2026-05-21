@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neon Calendar</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#050816;
+    color:white;
+    min-height:100vh;
+    padding:20px;
+    overflow:auto;
+}
+
+.container{
+    width:100%;
+    height:95vh;
+    background:#071127;
+    border:2px solid #3b82f6;
+    border-radius:25px;
+    padding:20px;
+    box-shadow:0 0 30px #2563eb;
+    display:flex;
+    flex-direction:column;
+    overflow:auto;
+}
+
+/* blue scrollbar */
+.container::-webkit-scrollbar {
+    width: 12px;
+}
+
+.container::-webkit-scrollbar-track {
+    background: rgba(15, 23, 42, 0.6);
+    border-radius: 999px;
+}
+
+.container::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #60a5fa, #2563eb);
+    border-radius: 999px;
+    border: 3px solid rgba(15, 23, 42, 0.6);
+}
+
+.container {
+    scrollbar-width: thin;
+    scrollbar-color: #2563eb rgba(15, 23, 42, 0.6);
+}
+
+/* TOPBAR */
+
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.topbar h1{
+    color:#93c5fd;
+    font-size:32px;
+}
+
+.controls{
+    display:flex;
+    gap:10px;
+}
+
+.navBtn,
+.addBtn{
+    padding:12px 20px;
+    border:none;
+    border-radius:12px;
+    background:#2563eb;
+    color:white;
+    cursor:pointer;
+    box-shadow:0 0 10px #3b82f6;
+    transition:0.3s;
+}
+
+.navBtn:hover,
+.addBtn:hover{
+    transform:scale(1.05);
+}
+
+/* CALENDAR */
+
+.calendar{
+    flex:1;
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    grid-template-rows:50px repeat(6,1fr);
+    gap:5px;
+}
+
+.day-name{
+    background:#0f172a;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:10px;
+    color:#7dd3fc;
+    font-weight:bold;
+    border:1px solid #1d4ed8;
+}
+
+.day{
+    background:#081224;
+    border-radius:10px;
+    padding:8px;
+    border:1px solid #1e3a8a;
+    overflow-y:auto;
+    min-height:100px;
+    position:relative;
+}
+
+.day-number{
+    color:#93c5fd;
+    font-weight:bold;
+    margin-bottom:5px;
+}
+
+.today{
+    border:2px solid #38bdf8;
+    box-shadow:0 0 15px #38bdf8;
+}
+
+.event{
+    background:#2563eb;
+    padding:6px;
+    border-radius:8px;
+    margin-top:5px;
+    font-size:12px;
+    cursor:pointer;
+    box-shadow:0 0 10px #3b82f6;
+    transition:0.3s;
+    word-break:break-word;
+}
+
+.event:hover{
+    background:#1d4ed8;
+}
+
+.empty{
+    background:transparent;
+    border:none;
+}
+
+/* MODAL */
+
+.modal{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.7);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:1000;
+}
+
+.modal-content{
+    width:350px;
+    background:#0f172a;
+    padding:25px;
+    border-radius:20px;
+    border:1px solid #2563eb;
+    box-shadow:0 0 20px #2563eb;
+}
+
+.modal-content h2{
+    margin-bottom:20px;
+    color:#93c5fd;
+}
+
+.modal-content input,
+.modal-content select{
+    width:100%;
+    padding:12px;
+    margin-bottom:15px;
+    border:none;
+    border-radius:10px;
+    background:#1e293b;
+    color:white;
+}
+
+.modal-content button{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    background:#2563eb;
+    color:white;
+    cursor:pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- TOPBAR -->
+
+    <div class="topbar">
+
+        <button class="navBtn" onclick="previousMonth()">
+            ◀
+        </button>
+
+        <h1 id="monthTitle"></h1>
+
+        <div class="controls">
+
+            <button class="addBtn" onclick="openModal()">
+                + Add Task
+            </button>
+
+            <button class="navBtn" onclick="nextMonth()">
+                ▶
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- CALENDAR -->
+
+    <div class="calendar" id="calendar"></div>
+
+</div>
+
+<!-- MODAL -->
+
+<!-- MODAL -->
+
+<div class="modal" id="modal">
+
+    <div class="modal-content">
+
+        <h2>Add Task</h2>
+
+        <select id="taskMonth"></select>
+
+        <input 
+            type="number" 
+            id="taskDay" 
+            placeholder="Day"
+        >
+
+        <input 
+            type="number" 
+            id="taskYear" 
+            placeholder="Year"
+        >
+
+        <input 
+            type="email" 
+            id="taskEmail" 
+            placeholder="Your Email"
+        >
+
+        <input 
+            type="text" 
+            id="taskText" 
+            placeholder="Task Name"
+        >
+
+        <button onclick="addTask()">
+            Save Task
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+
+const calendar = document.getElementById("calendar");
+const monthTitle = document.getElementById("monthTitle");
+
+const modal = document.getElementById("modal");
+
+const months = [
+    "January","February","March","April",
+    "May","June","July","August",
+    "September","October","November","December"
+];
+
+const days = [
+    "Sun","Mon","Tue","Wed",
+    "Thu","Fri","Sat"
+];
+
+const today = new Date();
+
+let currentMonth = today.getMonth();
+let currentYear = today.getFullYear();
+
+/* MONTH OPTIONS */
+
+const taskMonth = document.getElementById("taskMonth");
+
+months.forEach((month,index)=>{
+
+    const option = document.createElement("option");
+
+    option.value = index;
+
+    option.innerText = month;
+
+    taskMonth.appendChild(option);
+});
+
+/* OPEN MODAL */
+
+function openModal(){
+
+    modal.style.display = "flex";
+
+    document.getElementById("taskMonth").value = currentMonth;
+
+    document.getElementById("taskYear").value = currentYear;
+}
+
+/* CLOSE MODAL */
+
+window.onclick = function(e){
+
+    if(e.target === modal){
+
+        modal.style.display = "none";
+    }
+}
+
+/* RENDER CALENDAR */
+
+function renderCalendar(month,year){
+
+    calendar.innerHTML = "";
+
+    monthTitle.innerText = `${months[month]} ${year}`;
+
+    /* DAY NAMES */
+
+    days.forEach(day=>{
+
+        const div = document.createElement("div");
+
+        div.className = "day-name";
+
+        div.innerText = day;
+
+        calendar.appendChild(div);
+    });
+
+    const firstDay =
+    new Date(year,month,1).getDay();
+
+    const totalDays =
+    new Date(year,month+1,0).getDate();
+
+    /* EMPTY CELLS */
+
+    for(let i=0;i<firstDay;i++){
+
+        const empty =
+        document.createElement("div");
+
+        empty.className = "day";
+
+        empty.style.visibility = "hidden";
+
+        calendar.appendChild(empty);
+    }
+
+    /* CREATE DAYS */
+
+    for(let day=1;day<=totalDays;day++){
+
+        const dayBox =
+        document.createElement("div");
+
+        dayBox.className = "day";
+
+        const key =
+        `${year}-${month}-${day}`;
+
+        dayBox.id = key;
+
+        if(
+            day === today.getDate() &&
+            month === today.getMonth() &&
+            year === today.getFullYear()
+        ){
+            dayBox.classList.add("today");
+        }
+
+        dayBox.innerHTML = `
+            <div class="day-number">${day}</div>
+        `;
+
+        calendar.appendChild(dayBox);
+    }
+
+    loadTasksFromDatabase();
+}
+
+/* ADD TASK */
+
+async function addTask(){
+
+    const month =
+    document.getElementById("taskMonth").value;
+
+    const day =
+    document.getElementById("taskDay").value;
+
+    const year =
+    document.getElementById("taskYear").value;
+
+    const email =
+    document.getElementById("taskEmail")
+    .value
+    .trim();
+
+    const text =
+    document.getElementById("taskText")
+    .value
+    .trim();
+
+    /* VALIDATION */
+
+    if(
+        day === "" ||
+        year === "" ||
+        email === "" ||
+        text === ""
+    ){
+
+        alert("Please fill all fields");
+
+        return;
+    }
+
+    /* EMAIL VALIDATION */
+
+    const emailPattern =
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if(!emailPattern.test(email)){
+
+        alert("Invalid Email");
+
+        return;
+    }
+
+    /* DAY VALIDATION */
+
+    const totalDays =
+    new Date(
+        year,
+        Number(month)+1,
+        0
+    ).getDate();
+
+    if(day < 1 || day > totalDays){
+
+        alert("Invalid Day");
+
+        return;
+    }
+
+    try{
+
+        const response =
+        await fetch(
+            "http://localhost:3000/add-task",
+            {
+
+                method:"POST",
+
+                headers:{
+                    "Content-Type":"application/json"
+                },
+
+                body:JSON.stringify({
+
+                    month,
+                    day,
+                    year,
+                    email,
+                    text
+                })
+            }
+        );
+
+        const data =
+        await response.json();
+
+        if(data.success){
+
+            alert("Task Added");
+
+            modal.style.display = "none";
+
+            document.getElementById("taskDay").value = "";
+
+            document.getElementById("taskYear").value = "";
+
+            document.getElementById("taskEmail").value = "";
+
+            document.getElementById("taskText").value = "";
+
+            renderCalendar(
+                currentMonth,
+                currentYear
+            );
+        }
+
+    }catch(error){
+
+        console.log(error);
+
+        alert("Server Error");
+    }
+}
+
+/* LOAD TASKS */
+
+async function loadTasksFromDatabase(){
+
+    try{
+
+        const response =
+        await fetch(
+            "http://localhost:3000/tasks"
+        );
+
+        const tasks =
+        await response.json();
+
+        tasks.forEach(task=>{
+
+            if(
+                Number(task.month) === currentMonth &&
+                Number(task.year) === currentYear
+            ){
+
+                const key =
+                `${task.year}-${task.month}-${task.day}`;
+
+                const dayBox =
+                document.getElementById(key);
+
+                if(dayBox){
+
+                    const event =
+                    document.createElement("div");
+
+                    event.className = "event";
+
+                    event.innerHTML = `
+                        ${task.text}
+                        <br>
+                        <small>${task.email}</small>
+                    `;
+
+                    /* DELETE TASK */
+
+                    event.onclick = async function(){
+
+                        if(confirm("Delete Task?")){
+
+                            await fetch(
+                                `http://localhost:3000/delete-task/${task.id}`,
+                                {
+                                    method:"DELETE"
+                                }
+                            );
+
+                            renderCalendar(
+                                currentMonth,
+                                currentYear
+                            );
+                        }
+                    };
+
+                    dayBox.appendChild(event);
+                }
+            }
+        });
+
+    }catch(error){
+
+        console.log(error);
+    }
+}
+
+/* MONTH NAVIGATION */
+
+function previousMonth(){
+
+    currentMonth--;
+
+    if(currentMonth < 0){
+
+        currentMonth = 11;
+
+        currentYear--;
+    }
+
+    renderCalendar(
+        currentMonth,
+        currentYear
+    );
+}
+
+function nextMonth(){
+
+    currentMonth++;
+
+    if(currentMonth > 11){
+
+        currentMonth = 0;
+
+        currentYear++;
+    }
+
+    renderCalendar(
+        currentMonth,
+        currentYear
+    );
+}
+
+/* NOTIFICATIONS */
+
+async function enableNotifications(){
+
+    if("Notification" in window){
+
+        if(Notification.permission !== "granted"){
+
+            await Notification.requestPermission();
+        }
+    }
+}
+
+enableNotifications();
+
+/* CHECK TASKS */
+
+async function checkTasks(){
+
+    try{
+
+        const response =
+        await fetch(
+            "http://localhost:3000/check-tasks"
+        );
+
+        const tasks =
+        await response.json();
+
+      tasks.forEach(task=>{
+
+    if(Notification.permission === "granted"){
+
+        new Notification(
+
+            `📅 ${task.text}`,
+
+            {
+                body:
+                `Reminder: ${task.text} is scheduled for today.`,
+                
+                icon:"/icon.png",
+
+                badge:"/badge.png"
+            }
+        );
+    }
+});
+
+    }catch(error){
+
+        console.log(error);
+    }
+}
+
+/* CHECK EVERY 30 SECONDS */
+
+setInterval(checkTasks,30000);
+
+checkTasks();
+
+/* INITIAL LOAD */
+renderCalendar(
+    currentMonth,
+    currentYear
+);
+</script>
+
+</body>
+</html>

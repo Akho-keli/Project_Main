@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Training Mode</title>
+    <link rel="stylesheet" href="Training_Mode.css">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="shell">
+
+        <!-- Header -->
+        <header class="topbar">
+            <div class="topbar-left">
+                
+                <span class="logo-text">SafetyDrill</span>
+            </div>
+            <div class="topbar-right">
+                <p id="score" class="score-display"></p>
+                <p id="trainingStatus" class="status-pill">Not Started</p>
+            </div>
+        </header>
+
+        <!-- Main card -->
+        <main class="card">
+
+            <!-- Progress bar -->
+            <div id="progressContainer" class="progress-track">
+                <div id="progressBar" class="progress-fill"></div>
+            </div>
+
+            <!-- Timer -->
+            <div class="timer-row">
+                <p id="timer" class="timer-text"></p>
+            </div>
+
+            <!-- Question -->
+            <div class="question-block">
+                <p id="question" class="question-text">Press Start Training to begin.</p>
+            </div>
+
+            <!-- Options -->
+            <div id="options" class="options-grid"></div>
+
+            <!-- Hint -->
+            <p id="hintText" class="hint-text"></p>
+
+            <!-- Feedback -->
+            <p id="feedback" class="feedback-text"></p>
+
+        </main>
+
+        <!-- Controls -->
+        <div class="controls">
+            <button id="startTraining" class="btn btn-primary">Start</button>
+            <button id="hintBtn" class="btn btn-ghost">Hint</button>
+            <button id="restartScenario" class="btn btn-ghost"> Restart</button>
+            <button id="resetTraining" class="btn btn-danger">Reset</button>
+        </div>
+
+    </div>
+
+    <script src="Traning_mode.js"></script>
+</body>
+</html>

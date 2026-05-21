@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>GasSafe | Admin Command Center</title>
+    <link rel="stylesheet" href="dashboard.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="sidebar-brand">GasSafe</div>
+        <ul class="menu">
+            <li class="active">
+                <a href="#" onclick="loadPage('admin_home.html', 'Overview')">
+                    <ion-icon name="grid-outline"></ion-icon>
+                    <span>Overview</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="loadPage('admin_profile.html', 'Profile')">
+                    <ion-icon name="person-circle-outline"></ion-icon>
+                    <span>Profile</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="loadPage('Performance.html', 'Performance')">
+                    <ion-icon name="bar-chart-outline"></ion-icon>
+                    <span>Performance</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="loadPage('Plan_Type.html', 'PrimeCare Insurance')">
+                    <ion-icon name="shield-checkmark-outline"></ion-icon>
+                    <span>PrimeCare Insurance</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="loadPage('Gas_Filling.html', 'Gas Refilling')">
+                    <ion-icon name="flame-outline"></ion-icon>
+                    <span>Gas Refilling</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="#" onclick="loadPage('Users.html', 'Users')">
+                    <ion-icon name="person-outline"></ion-icon>
+                    <span>Users</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="#" onclick="loadPage('Admin_reports.html', 'View Reports')">
+                    <ion-icon name="eye-outline"></ion-icon>
+                    <span>View Reports</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="#" onclick="loadPage('Gas_Usage_Management_System.html', 'Settings')">
+                    <ion-icon name="settings-outline"></ion-icon>
+                    <span>Settings</span>
+                </a>
+            </li>
+            <li style="margin-top: auto;">
+                <a href="HOME_PAGE.html">
+                    <ion-icon name="log-out-outline"></ion-icon>
+                    <span>Log-out</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="main--content">
+        <div class="header--wrapper">
+            <div class="header--title">
+                <span>Live Monitoring • Gas Safe</span>
+                <h2 id="pageTitle">Dashboard</h2>
+            </div>
+
+            <div class="user--info">
+                <div class="search--box">
+                    <ion-icon name="search-outline"></ion-icon>
+                    <input type="text" id="iframeSearch" placeholder="Search inside page..."
+                        onkeyup="searchInsideIframe()">
+                </div>
+                <img src="https://ui-avatars.com/api/?background=3b82f6&color=fff&rounded=true&bold=true&size=44&name=Admin"
+                    alt="Admin">
+
+                <button id="themeToggle" class="theme-toggle" onclick="toggleTheme()" title="Dark/Light mode">
+                    <ion-icon name="moon-outline"></ion-icon>
+                </button>
+
+            </div>
+
+        </div>
+
+        <iframe id="contentFrame" class="content-frame" src="admin_home.html" title="Admin Panel"></iframe>
+    </div>
+    <script src="dashbord.js"></script>
+</body>
+</html>

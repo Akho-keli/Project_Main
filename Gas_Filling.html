@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gas Refill System</title>
+  <link rel="stylesheet" href="Gas_Filling.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="app">
+
+  <div class="top-row">
+    <div class="big-stat">
+      <span class="lbl">Gas level</span>
+      <span class="val" id="pctBig">—</span>
+      <span class="sub">of tank capacity</span>
+    </div>
+    <div class="big-stat">
+      <span class="lbl">Days remaining</span>
+      <span class="val" id="daysBig">—</span>
+      <span class="sub">at current usage</span>
+    </div>
+  </div>
+
+  <div class="tank-wrap">
+    <div class="tank-label-row">
+      <span>Empty</span>
+      <strong id="tank-label">Enter values below</strong>
+      <span>Full</span>
+    </div>
+    <div class="tank-outer">
+      <div class="tank-fill" id="tank-fill"></div>
+    </div>
+    <div class="tick-row">
+      <span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span>
+    </div>
+
+    <div class="inputs-row">
+      <div class="field">
+        <label for="gasLevel">Current gas level (%)</label>
+        <input type="number" id="gasLevel" placeholder="e.g. 40" min="0" max="100">
+      </div>
+      <div class="field">
+        <label for="dailyUsage">Daily usage (%)</label>
+        <input type="number" id="dailyUsage" placeholder="e.g. 5" min="1" max="100">
+      </div>
+    </div>
+
+    <button id="checkBtn">Calculate</button>
+  </div>
+
+  <div class="alert alert-idle" id="alertBar">
+    <span id="alertText">Enter gas level and daily usage, then hit Calculate.</span>
+  </div>
+
+  <div class="cost-card">
+    <p class="section-head">Cost estimator</p>
+
+    <div class="inputs-row" style="margin-bottom:12px">
+      <div class="field">
+        <label for="tankSize">Tank size (kg)</label>
+        <input type="number" id="tankSize" placeholder="e.g. 19" min="1">
+      </div>
+      <div class="field">
+        <label for="fillPercent">Fill amount (%)</label>
+        <input type="number" id="fillPercent" placeholder="e.g. 60" min="1" max="100">
+      </div>
+    </div>
+
+    <p class="cost-sub-head">Price per kg (R)</p>
+    <div class="price-grid">
+      <div class="price-row">
+        <label for="priceGasCo">GasCo</label>
+        <input type="number" id="priceGasCo" placeholder="e.g. R 200" min="0" step="0.01">
+      </div>
+      <div class="price-row">
+        <label for="priceQuickGas">QuickGas</label>
+        <input type="number" id="priceQuickGas" placeholder="e.g. R 200" min="0" step="0.01">
+      </div>
+      <div class="price-row">
+        <label for="priceHomeGas">HomeGas</label>
+        <input type="number" id="priceHomeGas" placeholder="e.g. R 100" min="0" step="0.01">
+      </div>
+    </div>
+
+    <button id="estimateBtn">Estimate cost</button>
+
+    <div id="costResults" class="cost-results hidden">
+      <div class="cost-item" id="costGasCo">
+        <div class="cost-name">GasCo</div>
+        <div class="cost-amount" id="amtGasCo"></div>
+        <div class="cost-badge hidden" id="badgeGasCo">Cheapest</div>
+      </div>
+      <div class="cost-item" id="costQuickGas">
+        <div class="cost-name">QuickGas</div>
+        <div class="cost-amount" id="amtQuickGas"></div>
+        <div class="cost-badge hidden" id="badgeQuickGas">Cheapest</div>
+      </div>
+      <div class="cost-item" id="costHomeGas">
+        <div class="cost-name">HomeGas</div>
+
+        <div class="cost-amount" id="amtHomeGas"></div>
+
+        <div class="cost-badge hidden" id="badgeHomeGas">Cheapest</div>
+      </div>
+    </div>
+    <p id="costErr" class="err hidden"></p>
+  </div>
+
+  <div class="book-card">
+    <p class="section-head">Choose a supplier</p>
+
+    <div class="supplier-grid">
+
+      <div class="supplier-btn" data-s="GasCo" onclick="pickSupplier(this)">
+        
+        <span class="supplier-name">GasCo</span>
+        <small>Same-day</small>
+      </div>
+      <div class="supplier-btn" data-s="QuickGas" onclick="pickSupplier(this)">
+        <span class="supplier-name">QuickGas</span>
+        <small>Express</small>
+      </div>
+      <div class="supplier-btn" data-s="HomeGas" onclick="pickSupplier(this)">
+        <span class="supplier-name">HomeGas</span>
+        <small>Scheduled</small>
+      </div>
+    </div>
+
+    <p class="section-head">Delivery date</p>
+    <div class="book-row">
+      <div class="field">
+        <input type="date" id="date">
+      </div>
+      <button id="bookBtn" onclick="bookRefill()">Book</button>
+    </div>
+
+    <p id="bookErr" class="err hidden"></p>
+    <div id="bookConfirm" class="confirm hidden">
+      <strong id="confirmHead"></strong>
+      <span id="confirmSub"></span>
+    </div>
+  </div>
+
+</div>
+
+<script src="Gas_Refilling.js"></script>
+</body>
+</html>

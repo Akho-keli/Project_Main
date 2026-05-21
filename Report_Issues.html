@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report an Issue</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Report_Issues.css">
+</head>
+
+<body>
+
+    <h2>Report an Issue</h2>
+
+    <form id="reportForm">
+        <input type="text" id="username" placeholder="Enter your name" required><br><br>
+
+        <textarea id="issue" placeholder="Describe your issues" required></textarea><br><br>
+
+        <button type="submit">Submit Report</button>
+    </form>
+
+    <h3>Your Reports</h3>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Issue</th>
+                <th>Status</th>
+                <th>Feedback</th>
+            </tr>
+        </thead>
+        <tbody id="userReports"></tbody>
+
+    </table>
+  
+       
+        
+        <div class="card">
+            <h3>Tenant Issues</h3>
+            <textarea id="issue" rows="5" cols="50" placeholder="Describe the issue..."></textarea><br>
+            <label>Admin Email:</label><br>
+            <input type="email" id="adminEmail" placeholder="e.g sabza@gmail.com" required><br>
+            <button id="send">Send</button>
+        </div>
+    
+    <!-- Link to external JS -->
+    <script src="Report_Issues.js"></script>
+</body>
+
+</html>

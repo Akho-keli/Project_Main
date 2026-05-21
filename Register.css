@@ -1,0 +1,225 @@
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+     font-family: 'Inter', sans-serif;
+}
+
+body{
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #07131f;
+    overflow: hidden;
+    position: relative;
+    padding: 20px;
+}
+
+/* ===== Industrial Background ===== */
+body::before{
+    content: '';
+    position: absolute;
+    width: 650px;
+    height: 650px;
+    background: radial-gradient(circle, rgba(0,255,170,0.12), transparent 70%);
+    top: -250px;
+    left: -250px;
+}
+
+body::after{
+    content: '';
+    position: absolute;
+    width: 650px;
+    height: 650px;
+    background: radial-gradient(circle, rgba(0,180,255,0.12), transparent 70%);
+    bottom: -250px;
+    right: -250px;
+}
+
+/* ===== Main Container ===== */
+.container{
+    position: relative;
+    width: 420px;
+    padding: 30px 30px;
+    border-radius: 24px;
+    background: rgba(9, 20, 32, 0.92);
+    border: 1px solid rgba(0,255,170,0.15);
+    backdrop-filter: blur(14px);
+    box-shadow:
+        0 0 25px rgba(0,255,170,0.08),
+        0 0 60px rgba(0,0,0,0.5);
+    overflow: hidden;
+    z-index: 10;
+}
+
+/* ===== Tech Accent Shape ===== */
+.curved-shape{
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    background: linear-gradient(135deg, #00ffa6, #008cff);
+    top: -120px;
+    right: -110px;
+    border-radius: 50%;
+    opacity: 0.22;
+    filter: blur(20px);
+}
+
+/* ===== Form ===== */
+.form-box{
+    position: relative;
+    z-index: 5;
+}
+
+.h2{
+    text-align: center;
+    color: #ffffff;
+    font-size: 2rem;
+    margin-bottom: 5px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.h2::after{
+    content: 'GAS MONITORING SYSTEM';
+    display: block;
+    font-size: 11px;
+    color: #00ffa6;
+    letter-spacing: 3px;
+    margin-top: 6px;
+    font-weight: 500;
+}
+
+/* ===== Input Fields ===== */
+.input{
+    position: relative;
+    margin: 22px 0;
+}
+
+.input input{
+    width: 100%;
+    padding: 14px 48px 14px 16px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    outline: none;
+    color: #fff;
+    font-size: 15px;
+    transition: 0.35s ease;
+}
+
+/* ===== Input Focus ===== */
+.input input:focus{
+    border-color: #00ffa6;
+    box-shadow:
+        0 0 10px rgba(0,255,166,0.30),
+        0 0 18px rgba(0,255,166,0.12);
+    background: rgba(0,255,166,0.04);
+}
+
+/* ===== Labels ===== */
+.input label{
+    position: absolute;
+    top: 50%;
+    left: 16px;
+    transform: translateY(-50%);
+    color: rgba(255,255,255,0.6);
+    pointer-events: none;
+    transition: 0.3s ease;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+}
+
+.input input:focus ~ label,
+.input input:valid ~ label{
+    top: -9px;
+    left: 12px;
+    font-size: 11px;
+    color: #00ffa6;
+    background: #091420;
+    padding: 0 6px;
+    border-radius: 4px;
+}
+
+/* ===== Icons ===== */
+.input ion-icon{
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    transform: translateY(-50%);
+    color: rgba(255,255,255,0.7);
+    font-size: 20px;
+    transition: 0.3s ease;
+}
+
+.input input:focus ~ ion-icon{
+    color: #00ffa6;
+    text-shadow: 0 0 10px #00ffa6;
+}
+
+/* ===== Register Button ===== */
+.bnt{
+    width: 100%;
+    padding: 13px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #00ffa6, #008cff);
+    color: #07131f;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.35s ease;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    box-shadow: 0 8px 20px rgba(0,255,166,0.20);
+}
+
+.bnt:hover{
+    transform: translateY(-2px);
+    box-shadow:
+        0 12px 28px rgba(0,255,166,0.30);
+}
+
+.bnt:active{
+    transform: scale(0.98);
+}
+
+/* ===== Login Link ===== */
+.regi-link{
+    text-align: center;
+    margin-top: 14px;
+}
+
+.regi-link p{
+    color: rgba(255,255,255,0.7);
+    font-size: 13px;
+}
+
+.regi-link a{
+    color: #00ffa6;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s ease;
+}
+
+.regi-link a:hover{
+    color: #ffffff;
+    text-shadow: 0 0 8px #00ffa6;
+}
+
+/* ===== Responsive ===== */
+@media(max-width: 500px){
+
+    .container{
+        width: 95%;
+        padding: 25px 20px;
+    }
+
+    .h2{
+        font-size: 1.7rem;
+    }
+
+}

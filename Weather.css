@@ -1,0 +1,101 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #08101d;
+    /* dark blue */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    min-height: 100vh;
+    color: #ffffff;
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: #00bfff;
+    /* lighter blue for contrast */
+}
+
+.input-group {
+    display: flex;
+    margin-bottom: 30px;
+    border-radius: 10px;
+}
+
+input {
+    padding: 10px 15px;
+    font-size: 16px;
+    border: 1px solid #aaa;
+    border-radius: 6px 0 0 6px;
+    outline: none;
+    width: 250px;
+}
+
+button {
+    padding: 10px 15px;
+    font-size: 18px;
+    border-radius:2px 2px 2px;
+    background-color: #00bfff;
+    color: #001f4d;
+    cursor: pointer;
+    top:50%;
+}
+
+button:hover {
+    background-color: #225f75;
+    transition: all 0.5s ease-in-out;
+}
+
+/* Weather card styling */
+#weatherResult {
+    background-color: #003366;
+    /* darker card background */
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    padding: 20px 30px;
+    max-width: 450px;
+    width: 100%;
+    color: #ffffff;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #ffffff;
+}
+
+th {
+    background-color: #00c3ff;
+    color: #690564;
+    padding: 10px;
+    text-align: center;
+    border-radius: 6px 6px 0 0;
+}
+
+td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ffffff33;
+    /* semi-transparent white */
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+p.error {
+    color: #ff4d4d;
+    text-align: center;
+    font-weight: bold;
+}
+/* Responsive adjustments */
+@media (max-width: 400px) {
+    .box {
+        width: 90%;
+        padding: 30px 20px;
+    }
+    .box .text ion-icon {
+        right: 20px;
+        top: 160px;
+    }
+}

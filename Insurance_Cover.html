@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INSURANCE COVER</title>
+    <link rel="stylesheet" href="Insurance_Cover.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+
+    <header>
+        <div class="logo">Apartment<span>Shield</span></div>
+        <span class="status" id="status">
+            Building: Safe
+        </span>
+    </header>
+
+    <div class="main">
+
+        <div class="title">Protection And Claims</div>
+        <div class="subtitle">
+            Register your belongings here, activate a plan so that in event of fire you are covered.
+        </div>
+
+        <!-- APARTMENT SELECT -->
+        <div class="label">Select apartment</div>
+        <div class="tabs" id="tabs"></div>
+
+        <!-- PLANS -->
+        <div class="label">Choose protection plan</div>
+        <div class="plans" id="plans"></div>
+
+        <!-- BELONGINGS -->
+        <div class="label">Register belongings</div>
+
+        <div class="card">
+
+            <div class="row">
+                <label>Category</label>
+
+                <select id="cat">
+                    <option>Electronics</option>
+                    <option>Furniture</option>
+                    <option>Appliances</option>
+                    <option>Clothing</option>
+                    <option>Jewellery</option>
+                </select>
+
+                <input type="text" id="item" placeholder="Item name (e.g. TV)">
+                <input type="text" id="value" placeholder="Value (R)" min="0">
+
+                <button class="btn" id="add">+ Add item</button>
+            </div>
+
+            <div id="list">
+                <p class="empty">No items registered yet.</p>
+            </div>
+
+        </div>
+
+        <!-- Summary Coverage   -->
+        <div class="label">Coverage summary</div>
+
+        <div class="stats">
+
+            <div class="box">
+                <div class="text">Total insured value</div>
+                <div class="num" id="total">R 0</div>
+            </div>
+
+            <div class="box">
+                <div class="text">Monthly premium</div>
+                <div class="num" id="fee">R 0</div>
+            </div>
+
+            <div class="box">
+                <div class="text">Coverage limit</div>
+                <div class="num" id="limit">—</div>
+            </div>
+
+            <div class="box">
+                <div class="text">Active plan</div>
+                <div class="num" id="plan">None</div>
+            </div>
+
+        </div>
+
+        <!-- Payment -->
+        <div class="label">Payment</div>
+
+        <div class="card">
+
+            <div class="row">
+                <label>Email</label>
+                <input type="email" id="email" placeholder="Enter your email">
+
+                <label>Name</label>
+                <input type="text" id="name">
+
+                <label>Card</label>
+                <input type="text" id="card" maxlength="19">
+
+                <button class="btn" id="pay">Activate plan</button>
+
+            </div>
+
+            <div class="alert" id="paymsg"></div>
+
+        </div>
+
+        <!-- This part is for generating the  claim-->
+        <div class="label">Generate claim </div>
+
+        <div class="card">
+
+            <div class="row">
+
+                <label>Room</label>
+                <select id="room">
+                    <option>Room 1</option>
+                    <option>Room 2</option>
+                    <option>Room 3</option>
+                    <option>Room 4</option>
+                </select>
+
+                <label>Damage</label>
+                <select id="damage">
+                    <option value="0.3">Minor 30%</option>
+                    <option value="0.6">Moderate 60%</option>
+                    <option value="1.0">Total 100%</option>
+                </select>
+
+                <button class="btn danger" id="claim">
+                    Generate claim
+                </button>
+
+            </div>
+
+            <div class="alert" id="claimmsg"></div>
+
+        </div>
+
+        <!-- Report -->
+        <div class="report" id="report">
+
+            <div class="head">
+
+                <div>
+                    <div id="rid"></div>
+                    <div id="rdate"></div>
+                </div>
+
+                <div>
+                    <span class="status-text">Pending review</span>
+                    <span id="rtype"></span>
+                </div>
+
+            </div>
+
+            <div class="section">Incident details</div>
+            <div id="rinfo"></div>
+
+            <div class="line"></div>
+
+            <div class="section">Damage report</div>
+            <div id="ritems"></div>
+
+            <div class="total" id="rtotal"></div>
+            <div class="footer" id="rfooter"></div>
+
+        </div>
+
+    </div>
+
+    <script src="Insurance_Cover.js"></script>
+</body>
+</html>

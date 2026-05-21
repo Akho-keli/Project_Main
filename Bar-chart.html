@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <title>Smart Gas Monitoring Dashboard</title>
+
+    <!-- GOOGLE FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+    <!-- CHART JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- LEAFLET -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="Bar-chart.css"/>
+
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="topbar">
+
+        <div class="header-left">
+
+            <div class="logo-box">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+
+            <div>
+                <h1>Smart Gas Monitoring</h1>
+
+                <p class="subtitle">
+                    Real-Time Apartment Safety Dashboard
+                </p>
+            </div>
+
+        </div>
+
+        <div class="header-right">
+
+            <div id="modeIndicator" class="mode-indicator safe">
+
+                <i class="fa-solid fa-circle-check"></i>
+                BUILDING STATUS: SAFE
+
+            </div>
+
+            <div class="clock-box">
+                <i class="fa-regular fa-clock"></i>
+                <span id="clock"></span>
+            </div>
+
+        </div>
+
+    </header>
+
+    <!-- ================= KPI STATS ================= -->
+
+    <section class="stats-grid">
+
+        <div class="stat-card">
+
+            <div class="stat-icon blue">
+                <i class="fa-solid fa-building"></i>
+            </div>
+
+            <div>
+                <h3>Total Apartments</h3>
+                <p id="totalApts">4</p>
+            </div>
+
+        </div>
+
+        <div class="stat-card">
+
+            <div class="stat-icon red">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+
+            <div>
+                <h3>Active Alerts</h3>
+                <p id="alerts">0</p>
+            </div>
+
+        </div>
+
+        <div class="stat-card">
+
+            <div class="stat-icon orange">
+                <i class="fa-solid fa-temperature-three-quarters"></i>
+            </div>
+
+            <div>
+                <h3>Average Temperature</h3>
+                <p id="avgTemp">0°C</p>
+            </div>
+
+        </div>
+
+        <div class="stat-card">
+
+            <div class="stat-icon green">
+                <i class="fa-solid fa-heart-pulse"></i>
+            </div>
+
+            <div>
+                <h3>System Health</h3>
+                <p id="health">100%</p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ================= MAIN GRID ================= -->
+
+    <main class="dashboard-grid">
+
+        <!-- ============ ENVIRONMENT ============ -->
+
+        <section class="card">
+
+            <div class="card-header">
+
+                <h2>
+                    <i class="fa-solid fa-cloud-sun"></i>
+                    Environment Monitoring
+                </h2>
+
+            </div>
+
+            <div class="system-info">
+
+                <div class="info-box">
+                    <span>Kitchen Cylinder</span>
+                    <strong id="kitchen-cylinder">Normal</strong>
+                </div>
+
+                <div class="info-box">
+                    <span>Bathroom Cylinder</span>
+                    <strong id="bathroom-cylinder">Normal</strong>
+                </div>
+
+                <div class="info-box">
+                    <span>Main Valve</span>
+                    <strong id="valve">Open</strong>
+                </div>
+
+            </div>
+
+            <div class="weather-grid">
+
+                <div class="weather-card">
+
+                    <i class="fa-solid fa-temperature-half"></i>
+
+                    <div>
+                        <p>Outside Temperature</p>
+
+                        <h3>
+                            <span id="outsideTemp">--</span> °C
+                        </h3>
+                    </div>
+
+                </div>
+
+                <div class="weather-card">
+
+                    <i class="fa-solid fa-cloud"></i>
+
+                    <div>
+                        <p>Weather</p>
+
+                        <h3 id="weather">
+                            --
+                        </h3>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ============ APARTMENTS ============ -->
+
+        <section class="card">
+
+            <div class="card-header">
+
+                <h2>
+                    <i class="fa-solid fa-building"></i>
+                    Apartment Monitoring
+                </h2>
+
+            </div>
+
+            <div id="dashboard"></div>
+
+        </section>
+
+        <!-- ============ RISK CHART ============ -->
+
+        <section class="card">
+
+            <div class="card-header">
+
+                <h2>
+                    <i class="fa-solid fa-chart-column"></i>
+                    Risk Overview
+                </h2>
+
+            </div>
+
+            <canvas id="riskChart"></canvas>
+
+        </section>
+
+        <!-- ============ TEMPERATURE ============ -->
+
+        <section class="card">
+
+            <div class="card-header">
+
+                <h2>
+                    <i class="fa-solid fa-chart-line"></i>
+                    Temperature Trends
+                </h2>
+
+            </div>
+
+            <canvas id="tempChart"></canvas>
+
+        </section>
+
+        <!-- ============ PIE CHART ============ -->
+
+        <section class="card">
+
+            <div class="card-header">
+
+                <h2>
+                    <i class="fa-solid fa-chart-pie"></i>
+                    Room Risk Distribution
+                </h2>
+
+            </div>
+
+            <div class="pie-container">
+
+                <canvas id="pie101"></canvas>
+
+            </div>
+
+        </section>
+
+        <!-- ============ LOGS ============ -->
+
+        <section class="card">
+
+            <div class="card-header">
+
+                <h2>
+                    <i class="fa-solid fa-terminal"></i>
+                    System Activity Logs
+                </h2>
+
+            </div>
+
+            <ul id="logs" class="logs-list">
+
+                <li>
+                    <i class="fa-solid fa-circle-check"></i>
+                    System initialized successfully.
+                </li>
+
+                <li>
+                    <i class="fa-solid fa-plug-circle-check"></i>
+                    Monitoring sensors connected.
+                </li>
+
+            </ul>
+
+        </section>
+
+        <!-- ============ MAP + BUILDING ============ -->
+
+        <section class="card">
+
+            <div class="card-header">
+
+                <h2>
+                    <i class="fa-solid fa-map-location-dot"></i>
+                    Emergency & Building Views
+                </h2>
+
+            </div>
+
+            <div class="button-group">
+
+                <button id="mapBtn" class="primary-btn">
+
+                    <i class="fa-solid fa-map"></i>
+                    Open Emergency Map
+
+                </button>
+
+                <button id="toggleBuildingBtn" class="secondary-btn">
+
+                    <i class="fa-solid fa-building"></i>
+                    Open Building View
+
+                </button>
+
+            </div>
+
+            <div id="map"></div>
+
+            <div id="building"></div>
+
+        </section>
+
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <p>
+            Smart Gas Monitoring System © 2026
+        </p>
+
+    </footer>
+
+    <!-- ================= CLOCK ================= -->
+
+    <script>
+
+        function updateClock() {
+
+            document.getElementById("clock").textContent =
+            new Date().toLocaleString();
+
+        }
+
+        updateClock();
+
+        setInterval(updateClock, 1000);
+
+    </script>
+
+    <!-- ================= MAIN JS ================= -->
+
+    <script src="Bar-chart.js"></script>
+
+</body>
+</html>
