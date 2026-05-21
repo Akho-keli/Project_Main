@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 const db = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "Akhokelimnkabane2004@",
+  password: "", // Your database Password 
   database: "Login"
 });
 
@@ -30,7 +30,7 @@ db.connect((err) => {
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "keliakho49@gmail.com",
+    user: "",//Your email address here 
     pass: "jhlcovzdfgqnfkii" //My app password
   }
 });
